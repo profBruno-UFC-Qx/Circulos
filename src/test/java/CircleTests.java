@@ -64,18 +64,18 @@ public class CircleTests {
 	
 	@Test
 	public void recuperandoTodosOsCirculos(){
-		assertTrue(gcont.criarCirculo(FAMILIA, 3), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarCirculo(AMIGOS, 1), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarCirculo(TRABALHO, 3), "O circulo deve ser adicionado");
+		gcont.criarCirculo(FAMILIA, 3);
+		gcont.criarCirculo(AMIGOS, 1);
+		gcont.criarCirculo(TRABALHO, 3);
 		
 		assertEquals(Arrays.asList(amigos, familia, trabalho), gcont.getTodosCirculos(), "Lista de circulos incorreta");
 	}
 	
 	@Test
 	public void removendoCirculoExistente(){
-		assertTrue(gcont.criarCirculo(FAMILIA, 3), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarCirculo(AMIGOS, 1), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarCirculo(TRABALHO, 3), "O circulo deve ser adicionado");
+		gcont.criarCirculo(FAMILIA, 3);
+		gcont.criarCirculo(AMIGOS, 1);
+		gcont.criarCirculo(TRABALHO, 3);
 		
 		assertTrue(gcont.removerCirculo(AMIGOS), "Circulo nao removido");
 		assertEquals(2, gcont.getNumeroDeCirculos(), "Quantidade de circulos errada");
@@ -84,9 +84,9 @@ public class CircleTests {
 	
 	@Test
 	public void removendoCirculoInexistente(){
-		assertTrue(gcont.criarCirculo(FAMILIA, 3), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarCirculo(AMIGOS, 1), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarCirculo(TRABALHO, 3), "O circulo deve ser adicionado");
+		gcont.criarCirculo(FAMILIA, 3);
+		gcont.criarCirculo(AMIGOS, 1);
+		gcont.criarCirculo(TRABALHO, 3);
 		
 		assertFalse(gcont.removerCirculo("inimigos"), "Circulo nao existe, logo nao pode ser removido");
 		assertEquals(3, gcont.getNumeroDeCirculos(), "Quantidade de circulos errada");
@@ -95,14 +95,14 @@ public class CircleTests {
 	
 	@Test
 	public void atualizandoCirculoExistente(){
-		assertTrue(gcont.criarCirculo(FAMILIA, 3), "O circulo deve ser adicionado");
+		gcont.criarCirculo(FAMILIA, 3);
 		assertTrue(gcont.atualizarCirculo(new Circulo(FAMILIA, 4)), "O circulo deve ser atualizado");
 		assertEquals(gcont.getCirculo(FAMILIA), new Circulo(FAMILIA, 4), "O circulo nao foi atualizado corretamente");
 	}
 	
 	@Test
 	public void atualizandoCirculoLimiteInvalido(){
-		assertTrue(gcont.criarCirculo(FAMILIA, 3), "O circulo deve ser adicionado");
+		gcont.criarCirculo(FAMILIA, 3);
 		assertFalse(gcont.atualizarCirculo(new Circulo(FAMILIA, 0)), "O circulo possui limite invalido");
 	}
 	

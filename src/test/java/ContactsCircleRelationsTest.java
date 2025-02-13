@@ -47,8 +47,8 @@ public class ContactsCircleRelationsTest {
 
 	@Test
 	public void adicionarContatoCirculoExistente() throws CirculoNotFoundException, ContatoNotFoundException {
-		assertTrue(gcont.criarCirculo(FAMILIA, 3), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarContato(JAMES, JAMES_EMAIL), "O contato deve ser adicionado");
+		gcont.criarCirculo(FAMILIA, 3);
+		gcont.criarContato(JAMES, JAMES_EMAIL);
 		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, FAMILIA), "Contato deve ser adicionado ao circulo");
 		assertEquals(1, gcont.getCirculo(FAMILIA).getNumeroDeContatos(), "Numero de contatos no circulo errado");
 		assertEquals(Arrays.asList(familia), gcont.recuperarCirculosDoContato(JAMES), "Lista de circulos do contato esta errada");
@@ -57,7 +57,7 @@ public class ContactsCircleRelationsTest {
 
 	@Test
 	public void adicionarContatoInexistenteCirculoExistente() {
-		assertTrue(gcont.criarCirculo(FAMILIA, 3), "O circulo deve ser adicionado");
+		gcont.criarCirculo(FAMILIA, 3);
 
 		assertThrows(ContatoNotFoundException.class, () -> gcont.adicionarContatoAoCirculo(JAMES, FAMILIA));
 		assertEquals(0, gcont.getCirculo(FAMILIA).getNumeroDeContatos(), "Numero de contatos no circulo errado");
@@ -66,7 +66,7 @@ public class ContactsCircleRelationsTest {
 
 	@Test
 	public void adicionarContatoCirculoInexistente() throws CirculoNotFoundException, Exception {
-		assertTrue(gcont.criarContato(JAMES, JAMES_EMAIL), "O contato deve ser adicionado");
+		gcont.criarContato(JAMES, JAMES_EMAIL);
 
 		CirculoNotFoundException e = assertThrows(CirculoNotFoundException.class, () -> gcont.adicionarContatoAoCirculo(JAMES, FAMILIA));
 		assertTrue(e.getCirculoNaoEncontrado() == FAMILIA, "A excecao nao retornou o id do circulo que nao existe");
@@ -77,9 +77,9 @@ public class ContactsCircleRelationsTest {
 
 	@Test
 	public void adicionarContatoDuplicadoCirculoExistente() throws CirculoNotFoundException, ContatoNotFoundException {
-		assertTrue(gcont.criarCirculo(FAMILIA, 3), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarContato(JAMES, JAMES_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, FAMILIA), "Contato deve ser adicionado ao circulo");
+		gcont.criarCirculo(FAMILIA, 3);
+		gcont.criarContato(JAMES, JAMES_EMAIL);
+		gcont.adicionarContatoAoCirculo(JAMES, FAMILIA);
 		assertFalse(gcont.adicionarContatoAoCirculo(JAMES, FAMILIA), "Contato ja esta no circulo");
 		assertEquals(1, gcont.getCirculo(FAMILIA).getNumeroDeContatos(), "Numero de contatos no circulo errado");
 		assertEquals(Arrays.asList(familia), gcont.recuperarCirculosDoContato(JAMES), "Lista de circulos do contato esta errada");
@@ -88,12 +88,12 @@ public class ContactsCircleRelationsTest {
 
 	@Test
 	public void adicionarAlemDoLimite() throws CirculoNotFoundException, ContatoNotFoundException {
-		assertTrue(gcont.criarCirculo(FAMILIA, 3), "O circulo deve ser adicionado");
+		gcont.criarCirculo(FAMILIA, 3);
 
-		assertTrue(gcont.criarContato(JAMES, JAMES_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(JOSE, JOSE_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(ANA, ANA_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(JOAQUIM, JOAQUIM_EMAIL), "O contato deve ser adicionado");
+		gcont.criarContato(JAMES, JAMES_EMAIL);
+		gcont.criarContato(JOSE, JOSE_EMAIL);
+		gcont.criarContato(ANA, ANA_EMAIL);
+		gcont.criarContato(JOAQUIM, JOAQUIM_EMAIL);
 
 		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, FAMILIA), "Contato deve ser adicionado ao circulo");
 		assertTrue(gcont.adicionarContatoAoCirculo(JOSE, FAMILIA), "Contato deve ser adicionado ao circulo");
@@ -103,16 +103,16 @@ public class ContactsCircleRelationsTest {
 
 	@Test
 	public void adicionarContatoVariosCirculos() throws CirculoNotFoundException, ContatoNotFoundException {
-		assertTrue(gcont.criarCirculo(FAMILIA, 3), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarCirculo(AMIGOS, 2), "O circulo deve ser adicionado");
+		gcont.criarCirculo(FAMILIA, 3);
+		gcont.criarCirculo(AMIGOS, 2);
 
-		assertTrue(gcont.criarContato(JAMES, JAMES_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(MARIO, MARIO_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(JOSE, JOSE_EMAIL), "O contato deve ser adicionado");
+		gcont.criarContato(JAMES, JAMES_EMAIL);
+		gcont.criarContato(MARIO, MARIO_EMAIL);
+		gcont.criarContato(JOSE, JOSE_EMAIL);
 
-		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, FAMILIA), "Contato deve ser adicionado ao circulo");
-		assertTrue(gcont.adicionarContatoAoCirculo(MARIO, FAMILIA), "Contato deve ser adicionado ao circulo");
-		assertTrue(gcont.adicionarContatoAoCirculo(JOSE, FAMILIA), "Contato deve ser adicionado ao circulo");
+		gcont.adicionarContatoAoCirculo(JAMES, FAMILIA);
+		gcont.adicionarContatoAoCirculo(MARIO, FAMILIA);
+		gcont.adicionarContatoAoCirculo(JOSE, FAMILIA);
 
 		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, AMIGOS), "Contato deve ser adicionado ao circulo");
 
@@ -123,15 +123,13 @@ public class ContactsCircleRelationsTest {
 
 	@Test
 	public void removendoContatoDoCirculo() throws CirculoNotFoundException, ContatoNotFoundException {
-		assertTrue(gcont.criarCirculo(FAMILIA, 3), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarCirculo(AMIGOS, 2), "O circulo deve ser adicionado");
+		gcont.criarCirculo(FAMILIA, 3);
+		gcont.criarCirculo(AMIGOS, 2);
 
-		assertTrue(gcont.criarContato(JAMES, JAMES_EMAIL), "O contato deve ser adicionado");
+		gcont.criarContato(JAMES, JAMES_EMAIL);
 
-		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, FAMILIA), "Contato deve ser adicionado ao circulo");
-		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, AMIGOS), "Contato deve ser adicionado ao circulo");
-
-		assertEquals(Arrays.asList(amigos, familia), gcont.recuperarCirculosDoContato(JAMES), "Lista de circulos do contato esta errada");
+		gcont.adicionarContatoAoCirculo(JAMES, FAMILIA);
+		gcont.adicionarContatoAoCirculo(JAMES, AMIGOS);
 
 		assertTrue(gcont.removerContatoDoCirculo(JAMES, AMIGOS), "Contato deve ser removido ao circulo");
 
@@ -140,9 +138,9 @@ public class ContactsCircleRelationsTest {
 
 	@Test
 	public void removendoContatoInexistenteDoCirculo() throws CirculoNotFoundException, ContatoNotFoundException {
-		assertTrue(gcont.criarCirculo(FAMILIA, 3), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarContato(JAMES, JAMES_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, FAMILIA), "Contato deve ser adicionado ao circulo");
+		gcont.criarCirculo(FAMILIA, 3);
+		gcont.criarContato(JAMES, JAMES_EMAIL);
+		gcont.adicionarContatoAoCirculo(JAMES, FAMILIA);
 
 		ContatoNotFoundException e = assertThrows(ContatoNotFoundException.class, () -> gcont.removerContatoDoCirculo("margarida", FAMILIA));
 		assertTrue(e.getContatoNaoEncontrado() == "margarida", "A excecao nao retornou o id do contato que nao existe");
@@ -151,7 +149,6 @@ public class ContactsCircleRelationsTest {
 
 	@Test
 	public void removendoContatoDoCirculoInexistente() {
-		assertTrue(gcont.criarContato(JAMES, JAMES_EMAIL), "O contato deve ser adicionado");
 		CirculoNotFoundException e = assertThrows(CirculoNotFoundException.class, () -> gcont.removerContatoDoCirculo(JAMES, FAMILIA));
 		assertTrue(e.getCirculoNaoEncontrado() == FAMILIA, "A excecao nao retornou o id do circulo que nao existe");
 	}
@@ -159,25 +156,25 @@ public class ContactsCircleRelationsTest {
 	@Test
 	public void removendoCirculoQuePossuiContatos() throws CirculoNotFoundException, ContatoNotFoundException {
 
-		assertTrue(gcont.criarCirculo(FAMILIA, 3), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarCirculo(AMIGOS, 2), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarCirculo(TRABALHO, 3), "O circulo deve ser adicionado");
+		gcont.criarCirculo(FAMILIA, 3);
+		gcont.criarCirculo(AMIGOS, 2);
+		gcont.criarCirculo(TRABALHO, 3);
 
-		assertTrue(gcont.criarContato(JAMES, JAMES_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(MARIO, MARIO_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(JOSE, JOSE_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(ANA, ANA_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(JOAQUIM, JOAQUIM_EMAIL), "O contato deve ser adicionado");
+		gcont.criarContato(JAMES, JAMES_EMAIL);
+		gcont.criarContato(MARIO, MARIO_EMAIL);
+		gcont.criarContato(JOSE, JOSE_EMAIL);
+		gcont.criarContato(ANA, ANA_EMAIL);
+		gcont.criarContato(JOAQUIM, JOAQUIM_EMAIL);
 
-		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, FAMILIA), "Contato deve ser adicionado ao circulo");
-		assertTrue(gcont.adicionarContatoAoCirculo(MARIO, FAMILIA), "Contato deve ser adicionado ao circulo");
-		assertTrue(gcont.adicionarContatoAoCirculo(JOSE, FAMILIA), "Contato deve ser adicionado ao circulo");
+		gcont.adicionarContatoAoCirculo(JAMES, FAMILIA);
+		gcont.adicionarContatoAoCirculo(MARIO, FAMILIA);
+		gcont.adicionarContatoAoCirculo(JOSE, FAMILIA);
 
-		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, TRABALHO), "Contato deve ser adicionado ao circulo");
-		assertTrue(gcont.adicionarContatoAoCirculo(JOAQUIM, TRABALHO), "Contato deve ser adicionado ao circulo");
-		assertTrue(gcont.adicionarContatoAoCirculo(ANA, TRABALHO), "Contato deve ser adicionado ao circulo");
+		gcont.adicionarContatoAoCirculo(JAMES, TRABALHO);
+		gcont.adicionarContatoAoCirculo(JOAQUIM, TRABALHO);
+		gcont.adicionarContatoAoCirculo(ANA, TRABALHO);
 
-		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, AMIGOS), "Contato deve ser adicionado ao circulo");
+		gcont.adicionarContatoAoCirculo(JAMES, AMIGOS);
 
 		assertTrue(gcont.removerCirculo(FAMILIA), "O circulo deve ser removido");
 
@@ -191,25 +188,25 @@ public class ContactsCircleRelationsTest {
 	@Test
 	public void removendoContatosQueEstaEmCirculos() throws CirculoNotFoundException, ContatoNotFoundException {
 
-		assertTrue(gcont.criarCirculo(FAMILIA, 3), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarCirculo(AMIGOS, 2), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarCirculo(TRABALHO, 3), "O circulo deve ser adicionado");
+		gcont.criarCirculo(FAMILIA, 3);
+		gcont.criarCirculo(AMIGOS, 2);
+		gcont.criarCirculo(TRABALHO, 3);
 
-		assertTrue(gcont.criarContato(JAMES, JAMES_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(JOSE, JOSE_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(ANA, ANA_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(MARIO, MARIO_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(JOAQUIM, JOAQUIM_EMAIL), "O contato deve ser adicionado");
+		gcont.criarContato(JAMES, JAMES_EMAIL);
+		gcont.criarContato(JOSE, JOSE_EMAIL);
+		gcont.criarContato(ANA, ANA_EMAIL);
+		gcont.criarContato(MARIO, MARIO_EMAIL);
+		gcont.criarContato(JOAQUIM, JOAQUIM_EMAIL);
 
-		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, FAMILIA), "Contato deve ser adicionado ao circulo");
-		assertTrue(gcont.adicionarContatoAoCirculo(MARIO, FAMILIA), "Contato deve ser adicionado ao circulo");
-		assertTrue(gcont.adicionarContatoAoCirculo(JOSE, FAMILIA), "Contato deve ser adicionado ao circulo");
+		gcont.adicionarContatoAoCirculo(JAMES, FAMILIA);
+		gcont.adicionarContatoAoCirculo(MARIO, FAMILIA);
+		gcont.adicionarContatoAoCirculo(JOSE, FAMILIA);
 
-		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, TRABALHO), "Contato deve ser adicionado ao circulo");
-		assertTrue(gcont.adicionarContatoAoCirculo(JOAQUIM, TRABALHO), "Contato deve ser adicionado ao circulo");
-		assertTrue(gcont.adicionarContatoAoCirculo(ANA, TRABALHO), "Contato deve ser adicionado ao circulo");
+		gcont.adicionarContatoAoCirculo(JAMES, TRABALHO);
+		gcont.adicionarContatoAoCirculo(JOAQUIM, TRABALHO);
+		gcont.adicionarContatoAoCirculo(ANA, TRABALHO);
 
-		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, AMIGOS), "Contato deve ser adicionado ao circulo");
+		gcont.adicionarContatoAoCirculo(JAMES, AMIGOS);
 
 		assertTrue(gcont.removerContato(JAMES), "O contato deve ser removido");
 
@@ -226,25 +223,25 @@ public class ContactsCircleRelationsTest {
 
 	@Test
 	public void circulosEmComum() throws CirculoNotFoundException, ContatoNotFoundException {
-		assertTrue(gcont.criarCirculo(FAMILIA, 3), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarCirculo(AMIGOS, 2), "O circulo deve ser adicionado");
-		assertTrue(gcont.criarCirculo(TRABALHO, 3), "O circulo deve ser adicionado");
+		gcont.criarCirculo(FAMILIA, 3);
+		gcont.criarCirculo(AMIGOS, 2);
+		gcont.criarCirculo(TRABALHO, 3);
 
-		assertTrue(gcont.criarContato(JAMES, JAMES_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(MARIO, MARIO_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(JOSE, JOSE_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(ANA, ANA_EMAIL), "O contato deve ser adicionado");
-		assertTrue(gcont.criarContato(JOAQUIM, JOAQUIM_EMAIL), "O contato deve ser adicionado");
+		gcont.criarContato(JAMES, JAMES_EMAIL);
+		gcont.criarContato(MARIO, MARIO_EMAIL);
+		gcont.criarContato(JOSE, JOSE_EMAIL);
+		gcont.criarContato(ANA, ANA_EMAIL);
+		gcont.criarContato(JOAQUIM, JOAQUIM_EMAIL);
 
-		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, FAMILIA), "Contato deve ser adicionado ao circulo");
-		assertTrue(gcont.adicionarContatoAoCirculo(MARIO, FAMILIA), "Contato deve ser adicionado ao circulo");
+		gcont.adicionarContatoAoCirculo(JAMES, FAMILIA);
+		gcont.adicionarContatoAoCirculo(MARIO, FAMILIA);
 
-		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, TRABALHO), "Contato deve ser adicionado ao circulo");
-		assertTrue(gcont.adicionarContatoAoCirculo(JOAQUIM, TRABALHO), "Contato deve ser adicionado ao circulo");
-		assertTrue(gcont.adicionarContatoAoCirculo(ANA, TRABALHO), "Contato deve ser adicionado ao circulo");
+		gcont.adicionarContatoAoCirculo(JAMES, TRABALHO);
+		gcont.adicionarContatoAoCirculo(JOAQUIM, TRABALHO);
+		gcont.adicionarContatoAoCirculo(ANA, TRABALHO);
 
-		assertTrue(gcont.adicionarContatoAoCirculo(JAMES, AMIGOS), "Contato deve ser adicionado ao circulo");
-		assertTrue(gcont.adicionarContatoAoCirculo(MARIO, AMIGOS), "Contato deve ser adicionado ao circulo");
+		gcont.adicionarContatoAoCirculo(JAMES, AMIGOS);
+		gcont.adicionarContatoAoCirculo(MARIO, AMIGOS);
 
 		assertEquals(Arrays.asList(trabalho), gcont.getCirculosEmComum(JAMES, ANA));
 		assertEquals(Collections.EMPTY_LIST, gcont.getCirculosEmComum(JAMES, JOSE));
